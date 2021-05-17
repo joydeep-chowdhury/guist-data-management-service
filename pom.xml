@@ -20,6 +20,7 @@
 
 	<modules>
 		<module>guist-scrapper</module>
+		<module>guist-persistor</module>
 	</modules>
 
 	<dependencies>

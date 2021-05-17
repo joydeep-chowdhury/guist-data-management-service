@@ -1,8 +1,14 @@
-package joydeep.poc.guistscrapper.domains;
+package joydeep.poc.guist.persistor.domains;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
+@Document(collection = "faculty_collection")
 public class Faculty {
+    @Id
+    private String _id;
     private List<String> facultyDetails;
     private String departmentName;
     private String designation;
@@ -16,6 +22,13 @@ public class Faculty {
         this.designation = designation;
     }
 
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public List<String> getFacultyDetails() {
         return facultyDetails;

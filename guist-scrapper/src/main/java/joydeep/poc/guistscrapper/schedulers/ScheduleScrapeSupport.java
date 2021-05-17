@@ -13,7 +13,7 @@ public class ScheduleScrapeSupport {
            this.scrapperContract=scrapperContract;
     }
 
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */3 * * * *")
     public void scrapeDetails(){
         scrapperContract.navigate();
     }
