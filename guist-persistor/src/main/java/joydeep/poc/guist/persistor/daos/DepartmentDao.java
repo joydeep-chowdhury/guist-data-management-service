@@ -6,6 +6,7 @@ import joydeep.poc.guist.persistor.repositories.DepartmentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -34,5 +35,10 @@ public class DepartmentDao implements PersistenceContract<Department> {
     @Override
     public List<Department> retrieveAll() {
         return departmentRepository.findAll();
+    }
+
+    @Override
+    public List<Department> retrieveAllByPage(int pageNo, int pageSize) {
+        return departmentRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 }

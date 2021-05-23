@@ -7,6 +7,7 @@ import joydeep.poc.guist.persistor.repositories.FacultyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
 @Qualifier("faculty")
 public class FacultyDao implements PersistenceContract<Faculty> {
 
-    private static final Logger logger= LoggerFactory.getLogger(FacultyDao.class);
+    private static final Logger logger = LoggerFactory.getLogger(FacultyDao.class);
     private final FacultyRepository facultyRepository;
 
     public FacultyDao(final FacultyRepository facultyRepository) {
@@ -28,14 +29,19 @@ public class FacultyDao implements PersistenceContract<Faculty> {
         List<Faculty> facultyList = facultyRepository.findByFacultyDetails(faculty.getFacultyDetails());
         if (facultyList.size() > 0) {
             facultyRepository.deleteAll(facultyList);
-            logger.info("Deleted identical faculties before persisting {}",facultyList);
+            logger.info("Deleted identical faculties before persisting {}", facultyList);
         }
         facultyRepository.save(faculty);
-        logger.info("Persisted {}",faculty);
+        logger.info("Persisted {}", faculty);
     }
 
     @Override
     public List<Faculty> retrieveAll() {
         return facultyRepository.findAll();
+    }
+
+    @Override
+    public List<Faculty> retrieveAllByPage(int pageNo, int pageSize) {
+        return facultyRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
 }

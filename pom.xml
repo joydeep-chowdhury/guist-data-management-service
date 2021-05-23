@@ -21,6 +21,7 @@
 	<modules>
 		<module>guist-scrapper</module>
 		<module>guist-persistor</module>
+		<module>guist-orchestrator</module>
 	</modules>
 
 	<dependencies>
@@ -28,6 +29,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>
