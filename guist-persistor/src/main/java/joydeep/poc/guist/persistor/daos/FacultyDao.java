@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 @Qualifier("faculty")
@@ -43,5 +44,30 @@ public class FacultyDao implements PersistenceContract<Faculty> {
     @Override
     public List<Faculty> retrieveAllByPage(int pageNo, int pageSize) {
         return facultyRepository.findAll(PageRequest.of(pageNo, pageSize));
+    }
+
+    public List<Faculty> retrieveByDepartmentNameAndDesignation(String departmentName, String designation) {
+        return facultyRepository.findByDepartmentNameAndDesignation(departmentName, designation);
+    }
+
+
+    public List<Faculty> retrieveByFacultyName(String facultyName) {
+        return facultyRepository.findAll().stream().filter(faculty -> {
+            List<String> facultyDetails = faculty.getFacultyDetails();
+            List<String> filteredDetails = facultyDetails.stream().filter(str -> str.contains(facultyName)).collect(Collectors.toList());
+            if (filteredDetails.size() == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }).collect(Collectors.toList());
+    }
+
+    public List<Faculty> retrieveByDepartmentName(String departmentName) {
+        return facultyRepository.findByDepartmentName(departmentName);
+    }
+
+    public List<Faculty> retrieveByDesignation(String designation) {
+        return facultyRepository.findByDesignation(designation);
     }
 }

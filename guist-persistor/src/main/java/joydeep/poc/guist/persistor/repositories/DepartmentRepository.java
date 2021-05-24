@@ -15,4 +15,6 @@ public interface DepartmentRepository extends CrudRepository<Department, String>
     List<Department> findByDepartmentName(String departmentName);
 
     List<Department> findAll(Pageable pageable);
+
+
 }

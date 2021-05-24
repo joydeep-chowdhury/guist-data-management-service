@@ -15,4 +15,10 @@ public interface FacultyRepository extends CrudRepository<Faculty, String> {
     List<Faculty> findByFacultyDetails(List<String> facultyDetails);
 
     List<Faculty> findAll(Pageable pageable);
+
+    List<Faculty> findByDepartmentNameAndDesignation(String departmentName,String designation);
+
+    List<Faculty> findByDepartmentName(String departmentName);
+
+    List<Faculty> findByDesignation(String designation);
 }

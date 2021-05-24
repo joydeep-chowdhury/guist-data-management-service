@@ -8,6 +8,7 @@ import java.util.List;
 
 public class Faculty {
 
+    private String _id;
     private List<String> facultyDetails;
     private String departmentName;
     private String designation;
@@ -21,6 +22,14 @@ public class Faculty {
         this.designation = designation;
     }
 
+
+    public String get_id() {
+        return _id;
+    }
+
+    public void set_id(String _id) {
+        this._id = _id;
+    }
 
     public List<String> getFacultyDetails() {
         return facultyDetails;

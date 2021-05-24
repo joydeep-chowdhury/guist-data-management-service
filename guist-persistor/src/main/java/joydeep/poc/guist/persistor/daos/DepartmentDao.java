@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 @Qualifier("department")
 public class DepartmentDao implements PersistenceContract<Department> {
-    private static final Logger logger= LoggerFactory.getLogger(DepartmentDao.class);
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentDao.class);
     private final DepartmentRepository departmentRepository;
 
     public DepartmentDao(final DepartmentRepository departmentRepository) {
@@ -26,10 +26,10 @@ public class DepartmentDao implements PersistenceContract<Department> {
         List<Department> departmentList = departmentRepository.findByDepartmentName(department.getDepartmentName());
         if (departmentList.size() > 0) {
             departmentRepository.deleteAll(departmentList);
-            logger.info("Deleted identical departments before persisting {}",departmentList);
+            logger.info("Deleted identical departments before persisting {}", departmentList);
         }
         departmentRepository.save(department);
-        logger.info("Persisted {}",department);
+        logger.info("Persisted {}", department);
     }
 
     @Override
@@ -41,4 +41,9 @@ public class DepartmentDao implements PersistenceContract<Department> {
     public List<Department> retrieveAllByPage(int pageNo, int pageSize) {
         return departmentRepository.findAll(PageRequest.of(pageNo, pageSize));
     }
+
+    public List<Department> retrieveByDepartmentName(String departmentName){
+        return departmentRepository.findByDepartmentName(departmentName);
+    }
+
 }

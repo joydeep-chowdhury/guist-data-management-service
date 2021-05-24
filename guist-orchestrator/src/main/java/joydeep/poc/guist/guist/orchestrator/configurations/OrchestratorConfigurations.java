@@ -12,6 +12,9 @@ public class OrchestratorConfigurations {
     private String departmentsSubresource;
     private String pageNoString;
     private String pageSizeString;
+    private String departmentNameString;
+    private String designationString;
+    private String facultyName;
 
     public String getPersistorUrl() {
         return persistorUrl;
@@ -51,5 +54,29 @@ public class OrchestratorConfigurations {
 
     public void setPageSizeString(String pageSizeString) {
         this.pageSizeString = pageSizeString;
+    }
+
+    public String getDepartmentNameString() {
+        return departmentNameString;
+    }
+
+    public void setDepartmentNameString(String departmentNameString) {
+        this.departmentNameString = departmentNameString;
+    }
+
+    public String getDesignationString() {
+        return designationString;
+    }
+
+    public void setDesignationString(String designationString) {
+        this.designationString = designationString;
+    }
+
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
     }
 }

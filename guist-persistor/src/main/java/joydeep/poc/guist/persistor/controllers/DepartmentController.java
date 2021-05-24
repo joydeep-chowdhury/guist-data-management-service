@@ -1,8 +1,9 @@
 package joydeep.poc.guist.persistor.controllers;
 
+import joydeep.poc.guist.persistor.daos.DepartmentDao;
 import joydeep.poc.guist.persistor.daos.PersistenceContract;
 import joydeep.poc.guist.persistor.domains.Department;
-import joydeep.poc.guist.persistor.domains.Faculty;
+import joydeep.poc.guist.persistor.dtos.DepartmentsResponseDTO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,18 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> departments() {
-        return departmentPersistenceContract.retrieveAll();
+    public DepartmentsResponseDTO departments() {
+        return new DepartmentsResponseDTO(departmentPersistenceContract.retrieveAll());
     }
 
     @GetMapping(params = {"pageNo", "pageSize"})
-    public List<Department> departmentsByPage(@RequestParam int pageNo, @RequestParam int pageSize) {
-        return departmentPersistenceContract.retrieveAllByPage(pageNo, pageSize);
+    public DepartmentsResponseDTO departmentsByPage(@RequestParam int pageNo, @RequestParam int pageSize) {
+        return new DepartmentsResponseDTO(departmentPersistenceContract.retrieveAllByPage(pageNo, pageSize));
+    }
+
+    @GetMapping(params = {"departmentName"})
+    public DepartmentsResponseDTO departmentsByDepartmentName(@RequestParam String departmentName) {
+        DepartmentDao departmentDao = (DepartmentDao) departmentPersistenceContract;
+        return new DepartmentsResponseDTO(departmentDao.retrieveByDepartmentName(departmentName));
     }
 }
